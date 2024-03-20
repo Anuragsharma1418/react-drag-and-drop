@@ -24,7 +24,9 @@ export default function App() {
   const addTask = (title) => {
     setTasks((tasks) => [...tasks, { id: tasks.length + 1, title }]);
   };
-
+  const deletTask = (id)=>{
+    setTasks(tasks.filter(item=>item.id!=id))
+  }
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -56,7 +58,7 @@ export default function App() {
         collisionDetection={closestCorners}
         onDragEnd={handleDragEnd}
       >
-        <Column id="toDo" tasks={tasks} />
+        <Column id="toDo" tasks={tasks} deletTask={deletTask} />
       </DndContext>
     </div>
   );
